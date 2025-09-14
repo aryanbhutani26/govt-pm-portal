@@ -43,7 +43,7 @@ export function HeroSection() {
               Apply for Internship
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+            <Button size="lg" variant="outline" className="border-accent text-accent hover:bg-accent/20 hover:text-accent">
               Learn More
             </Button>
           </div>
