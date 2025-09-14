@@ -1,13 +1,18 @@
 import { useState } from "react";
-import { BarChart3, Users, Briefcase, TrendingUp, Plus, Filter, Download } from "lucide-react";
+import { BarChart3, Users, Briefcase, TrendingUp, Plus, Filter, Download, X } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export function AdminDashboard() {
   const [selectedPeriod, setSelectedPeriod] = useState("this-month");
+  const [showAddForm, setShowAddForm] = useState(false);
 
   const stats = [
     {
@@ -87,12 +92,116 @@ export function AdminDashboard() {
             <Download className="mr-2 h-4 w-4" />
             Export
           </Button>
-          <Button>
+          <Button onClick={() => setShowAddForm(true)}>
             <Plus className="mr-2 h-4 w-4" />
             Add Internship
           </Button>
         </div>
       </div>
+
+      {/* Add Internship Form */}
+      {showAddForm && (
+        <Card className="card-government animate-fade-in">
+          <CardHeader className="flex flex-row items-center justify-between">
+            <div>
+              <CardTitle>Add New Internship</CardTitle>
+              <CardDescription>Create a new internship opportunity for the PM Internship Scheme</CardDescription>
+            </div>
+            <Button variant="outline" size="icon" onClick={() => setShowAddForm(false)}>
+              <X className="h-4 w-4" />
+            </Button>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="company">Company Name</Label>
+                  <Input id="company" placeholder="Enter company name" />
+                </div>
+                <div>
+                  <Label htmlFor="position">Position Title</Label>
+                  <Input id="position" placeholder="e.g., Software Developer Intern" />
+                </div>
+                <div>
+                  <Label htmlFor="location">Location</Label>
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select location" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="bangalore">Bangalore</SelectItem>
+                      <SelectItem value="mumbai">Mumbai</SelectItem>
+                      <SelectItem value="delhi">Delhi</SelectItem>
+                      <SelectItem value="pune">Pune</SelectItem>
+                      <SelectItem value="hyderabad">Hyderabad</SelectItem>
+                      <SelectItem value="chennai">Chennai</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label htmlFor="duration">Duration (months)</Label>
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select duration" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="3">3 months</SelectItem>
+                      <SelectItem value="6">6 months</SelectItem>
+                      <SelectItem value="12">12 months</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="slots">Number of Slots</Label>
+                  <Input id="slots" type="number" placeholder="e.g., 25" />
+                </div>
+                <div>
+                  <Label htmlFor="stipend">Monthly Stipend (₹)</Label>
+                  <Input id="stipend" type="number" placeholder="e.g., 15000" />
+                </div>
+                <div>
+                  <Label htmlFor="sector">Sector</Label>
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select sector" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="technology">Technology</SelectItem>
+                      <SelectItem value="finance">Finance</SelectItem>
+                      <SelectItem value="marketing">Marketing</SelectItem>
+                      <SelectItem value="healthcare">Healthcare</SelectItem>
+                      <SelectItem value="manufacturing">Manufacturing</SelectItem>
+                      <SelectItem value="education">Education</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label htmlFor="skills">Required Skills</Label>
+                  <Input id="skills" placeholder="e.g., React, Node.js, JavaScript" />
+                </div>
+              </div>
+            </div>
+            <div>
+              <Label htmlFor="description">Job Description</Label>
+              <Textarea 
+                id="description" 
+                placeholder="Provide detailed job description, responsibilities, and requirements..."
+                className="min-h-[100px]"
+              />
+            </div>
+            <div className="flex gap-3 justify-end">
+              <Button variant="outline" onClick={() => setShowAddForm(false)}>
+                Cancel
+              </Button>
+              <Button className="button-press">
+                Create Internship
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Stats Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
