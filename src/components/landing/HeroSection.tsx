@@ -39,11 +39,11 @@ export function HeroSection() {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-lg">
+            <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-lg hover-scale button-press animate-glow">
               Apply for Internship
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button size="lg" variant="outline" className="border-accent text-accent hover:bg-accent/20 hover:text-accent">
+            <Button size="lg" variant="outline" className="border-accent text-accent hover:bg-accent/20 hover:text-accent hover-scale button-press">
               Learn More
             </Button>
           </div>
@@ -51,9 +51,9 @@ export function HeroSection() {
           {/* Key Features */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
             {stats.map((stat, index) => (
-              <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20 card-elevated animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+              <Card key={index} className="bg-white/10 backdrop-blur-sm border-white/20 card-elevated animate-fade-in hover-scale hover-glow" style={{ animationDelay: `${index * 0.1}s` }}>
                 <CardContent className="p-6 text-center">
-                  <stat.icon className={`h-8 w-8 mx-auto mb-3 ${stat.color}`} />
+                  <stat.icon className={`h-8 w-8 mx-auto mb-3 ${stat.color} animate-float`} style={{ animationDelay: `${index * 0.2}s` }} />
                   <div className="text-2xl font-bold text-white">{stat.value}</div>
                   <div className="text-sm text-white/80">{stat.label}</div>
                 </CardContent>
